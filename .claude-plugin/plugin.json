@@ -1,0 +1,22 @@
+{
+  "name": "dream-agent",
+  "version": "0.1.0",
+  "description": "Cross-session memory for Claude Code without a second memory database: at session boundaries a cheap model digests the transcript delta into a replaceable branch-stamped handoff plus evidence-anchored lesson/long-term CANDIDATES. Nothing is hidden, nothing auto-promotes — candidates cross into durable memory only through the owner's guarded review path.",
+  "author": {
+    "name": "Matteo Lopreti",
+    "url": "https://github.com/matteolopreti"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/matteolopreti/dream-agent",
+  "skills": "./skills/",
+  "keywords": [
+    "memory",
+    "handoff",
+    "session-continuity",
+    "consolidation",
+    "hooks",
+    "context-recovery",
+    "evidence-anchors",
+    "curated-promotion"
+  ]
+}

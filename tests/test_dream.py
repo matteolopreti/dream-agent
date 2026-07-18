@@ -11,7 +11,7 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DREAM = os.path.join(os.path.dirname(HERE), "scripts", "dream.py")
+DREAM = os.path.join(os.path.dirname(HERE), "skills", "dream-agent", "scripts", "dream.py")
 
 SECRET = "sk-ant-api03-SECRETSECRETSECRETSECRET1234567890"
 

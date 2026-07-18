@@ -1,0 +1,29 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dream-agent",
+  "owner": {
+    "name": "matteolopreti"
+  },
+  "metadata": {
+    "description": "The handoff-and-promotion shim — session-boundary memory consolidation for Claude Code: replaceable stamped handoffs, evidence-anchored memory candidates, curated-only promotion."
+  },
+  "plugins": [
+    {
+      "name": "dream-agent",
+      "source": "./",
+      "description": "A 'dream agent' engineered the safe way (designed by a 3-lineage blind panel): SessionEnd enqueues, a cheap model digests the transcript delta at the next SessionStart, handoff.md is replaced (never accumulated) and stamped with branch+commit so a stale handoff is refused, and every lesson/long-term candidate carries transcript evidence anchors or is rejected. No continuous dump, no hidden privilege, no auto-writes to your knowledge base — promotion stays a human-reviewed step.",
+      "author": {
+        "name": "Matteo Lopreti",
+        "url": "https://github.com/matteolopreti"
+      },
+      "category": "development",
+      "keywords": [
+        "memory",
+        "handoff",
+        "session-continuity",
+        "consolidation",
+        "context-recovery"
+      ]
+    }
+  ]
+}
