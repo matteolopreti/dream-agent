@@ -27,19 +27,19 @@ commands call the internal `hook` bridge, which reads Claude Code's hook JSON fr
     "SessionEnd": [
       { "hooks": [
         { "type": "command",
-          "command": "python3 ~/.claude/skills/dream-agent/scripts/dream.py hook enqueue" }
+          "command": "python3 ~/.claude/skills/dream-agent/skills/dream-agent/scripts/dream.py hook enqueue" }
       ] }
     ],
     "SessionStart": [
       { "hooks": [
         { "type": "command",
-          "command": "python3 ~/.claude/skills/dream-agent/scripts/dream.py hook recover" }
+          "command": "python3 ~/.claude/skills/dream-agent/skills/dream-agent/scripts/dream.py hook recover" }
       ] }
     ],
     "Stop": [
       { "hooks": [
         { "type": "command",
-          "command": "python3 ~/.claude/skills/dream-agent/scripts/dream.py hook checkpoint" }
+          "command": "python3 ~/.claude/skills/dream-agent/skills/dream-agent/scripts/dream.py hook checkpoint" }
       ] }
     ]
   }
@@ -66,7 +66,7 @@ prior job, then recover." If you prefer zero startup latency, drop `digest` out 
 run it out of band instead (nightly cron or manual):
 
 ```sh
-python3 ~/.claude/skills/dream-agent/scripts/dream.py digest \
+python3 ~/.claude/skills/dream-agent/skills/dream-agent/scripts/dream.py digest \
   --state-root ~/.claude/projects/<project>/dream
 ```
 
@@ -79,7 +79,7 @@ Nothing crosses into durable memory or the vault automatically. Periodically:
 
 ```sh
 R=~/.claude/projects/<project>/dream
-python3 ~/.claude/skills/dream-agent/scripts/dream.py validate --state-root "$R"   # gate: exit 1 on any bad candidate
+python3 ~/.claude/skills/dream-agent/skills/dream-agent/scripts/dream.py validate --state-root "$R"   # gate: exit 1 on any bad candidate
 cat "$R/candidates.jsonl"                                                           # review proposals
 ```
 
