@@ -223,7 +223,8 @@ def build_prompt(delta, project):
 
 def run_model(model_cmd, prompt):
     argv = shlex.split(model_cmd)
-    proc = subprocess.run(argv, input=prompt, capture_output=True, text=True, timeout=120)
+    proc = subprocess.run(argv, input=prompt, capture_output=True, text=True,
+                          timeout=120, env=dict(os.environ, DREAM_CHILD="1"))
     if proc.returncode != 0:
         raise RuntimeError("model command exit %d: %s" % (proc.returncode, proc.stderr[:200]))
     return proc.stdout
@@ -445,6 +446,8 @@ def cmd_validate(a):
 
 def cmd_hook(a):
     """Bridge Claude Code's stdin hook JSON to op_* calls. Fail-open always."""
+    if os.environ.get("DREAM_CHILD"):
+        return 0  # never react to sessions the digester itself spawned
     try:
         data = json.load(sys.stdin)
     except Exception:
@@ -457,7 +460,9 @@ def cmd_hook(a):
         if a.event in ("enqueue", "checkpoint"):
             op_enqueue(state_root, session_id, transcript, cwd)
         elif a.event == "recover":
-            op_digest(state_root, None)  # finish any abandoned prior job (best effort)
+            # Digestion is nightly-only (dream_nightly.sh, idle-guarded). Digesting
+            # here spawned one `claude -p` per queued job on EVERY SessionStart, and
+            # each spawn's own SessionStart recursed — the 2026-07-21 RAM swarm.
             branch, commit = git_info(cwd)
             op_recover_print(state_root, branch, commit)
     except Exception as e:  # noqa: BLE001
